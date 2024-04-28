@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Pelikirjasto</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Lisää peli</h1>
+    <div>
+        <form th:object="${peli}" th:action="@{savepeli}" action="#" method="post">
+            <tr>
+                <label for="title">Nimi</label>
+                <input type="text" id="nimi" th:field="*{nimi}" />
+                <td th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Nimi Error</td>
+                <div style="clear: both; display: block; height: 10px;"></div>
+            </tr>
+
+            <label for="author">Arvio</label>
+            <input type="text" id="arvio" th:field="*{arvio}" />
+            <td th:if="${#fields.hasErrors('arvio')}" th:errors="*{arvio}">Arvio Error</td>
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <label for="publicationYear">Hinta</label>
+            <input type="text" id="hinta" th:field="*{hinta}" />
+            <td th:if="${#fields.hasErrors('hinta')}" th:errors="*{hinta}">Hinta Error</td>
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+
+            <p><input placeholder="dd.mm.yyyy" type="date" id="ostopaiva" name="ostopaiva" class="form-control" required
+                    th:field="*{ostopaiva}" /></p>
+
+            <label for="catlist">Kategoria</label>
+            <select id="catlist" th:field="*{kategoria}" class="form-control">
+                <option th:each="kategoria: ${kategoriat}" th:value="${kategoria.kategoriaid}"
+                    th:text="${kategoria.name}">
+                </option>
+            </select>
+
+            <input type="submit" value="Save"></input>
+        </form>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+<head>
+	<title>Pelikirjasto</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+	<h1 sec:authorize="hasAuthority('ADMIN')">Tervetuloa <span sec:authentication="name"></span>!</h1>
+
+	<h1 sec:authorize="isAnonymous() ">Tervetuloa Vierailija!</h1>
+	<h1>Pelikirjasto</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Nimi</th>
+			<th>Arvio</th>
+			<th>Hinta</th>
+			<th>Ostopäivä</th>
+			<th>Kategoria</th>
+			<th></th>
+			<th></th>
+
+		</tr>
+		<tr th:each="peli : ${pelit}">
+			<td th:text="${peli.nimi}"></td>
+
+			<td th:text="${peli.arvio}"></td>
+			<td th:text="${peli.hinta}"></td>
+			<td th:text="${peli.formatoituostopaiva}"></td>
+			<td th:text="${peli.kategoria.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletepeli/{id}(id=${peli.id})}"
+					class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editpeli/{id}(id=${peli.id})}"
+					class="btn btn-warning">Edit</a></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<a href="/addpeli" class="btn btn-success"> Lisää Peli </a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="/kategorialista" class="btn btn-success"> Kategorialista </a>
+			</td>
+		</tr>
+		<tr>
+			<td sec:authorize="isAnonymous() ">
+				<form th:action=" @{/login}" method="get">
+					<input class="btn btn-info" type="submit" value="Sign In" />
+				</form>
+			</td>
+			<td sec:authorize="hasAuthority('ADMIN')">
+				<form th:action="@{/logout}" method="post">
+					<input class="btn btn-danger" type="submit" value="Sign Out" />
+				</form>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

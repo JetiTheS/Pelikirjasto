@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lisää Kategoria</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Lisää Kategoria</h1>
+    <div>
+        <form th:object="${kategoria}" th:action="@{savekategoria}" action="#" method="post">
+
+            <label for="title">Nimi</label>
+            <input type="text" id="name" th:field="*{name}" />
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nimi Error</td>
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="submit" value="Save"></input>
+        </form>
+    </div>
+</body>
+
+</html>

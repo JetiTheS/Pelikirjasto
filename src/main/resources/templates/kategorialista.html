@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+<head>
+	<title>Kategoria lista</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Kategoria lista</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Kategoriat</th>
+
+		</tr>
+		<tr th:each="kategoria : ${kategoriat}">
+			<td th:text="${kategoria.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editkategoria/{id}(id=${kategoria.kategoriaid})}"
+					class="btn btn-warning">Edit</a>
+			</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletekategoria/{id}(id=${kategoria.kategoriaid})}"
+					class="btn btn-danger">Delete</a></td>
+
+
+		</tr>
+	</table>
+	<tr sec:authorize="hasAuthority('ADMIN')">
+		<a href="/addkategoria" class="btn btn-success"> Lisää Kategoria </a>
+	</tr>
+	<tr>
+		<a href="/" class="btn btn-success"> Takaisin Pelikirjastoon </a>
+	</tr>
+</body>
+
+</html>
