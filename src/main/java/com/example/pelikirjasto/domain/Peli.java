@@ -7,8 +7,8 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Peli {
@@ -18,7 +18,7 @@ public class Peli {
     private Long id;
     @NotBlank(message = "Anna joku nimi")
     private String nimi;
-    @Positive(message = "Numero kiitos")
+    @PositiveOrZero(message = "Numero kiitos")
     private int arvio;
     @NotBlank(message = "Jos ilmainen, kirjaa ilmainen")
     private String hinta;

@@ -17,6 +17,7 @@
 
             <label for="title">Name</label>
             <input type="text" id="name" th:field="*{name}" />
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nimi Error</td>
             <div style="clear: both; display: block; height: 10px;"></div>
 
             <input type="submit" value="Save"></input>

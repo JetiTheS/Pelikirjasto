@@ -25,7 +25,7 @@ public class PeliSecurity {
 
                                 .authorizeHttpRequests(authorize -> authorize
                                                 .requestMatchers(("/css/**")).permitAll()
-                                                .requestMatchers("/", "/pelikirjasto").permitAll()
+                                                .requestMatchers("/", "/pelikirjasto", "/kategorialista").permitAll()
                                                 .anyRequest().authenticated())
 
                                 .formLogin(formlogin -> formlogin.loginPage("/login")

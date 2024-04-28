@@ -35,6 +35,9 @@ public class KategoriaController {
     @RequestMapping(value = "/savekategoria", method = RequestMethod.POST)
     public String saveKategoria(@Valid Kategoria kategoria, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            if (kategoria.getKategoriaid() != null) {
+                return "editkategoria";
+            }
             return "addkategoria";
         }
         kategoriaRepository.save(kategoria);
